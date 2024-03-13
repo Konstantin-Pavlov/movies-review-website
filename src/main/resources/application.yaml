@@ -12,9 +12,16 @@ spring:
     username: root
     password: 123
     driver-class-name: org.h2.Driver
-#  sql:
-#    init:
-#      mode: always
+  #  sql:
+  #    init:
+  #      mode: always
 
   liquibase:
     change-log: classpath:/db_liquid/changelog/master.yaml
+
+    #http://localhost:8089/h2-console/
+    #jdbc:h2:./db/movies review;AUTO_SERVER=true
+    # disabled because the enabled console can cause unexpected errors
+  h2:
+    console:
+      enabled: false    #true ->
