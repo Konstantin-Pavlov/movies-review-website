@@ -6,5 +6,9 @@ create table if not exists users
 );
 
 -- insert into users(name, password)
--- values ('John Doe', '123456'),
---        ('Jane Smith', '123456');
+-- values ('John Doe', 'fs09v0x'),
+--        ('Jane Smith', 'sdf89s8');
+
+-- insert into moderators(EMAIL, PASSWORD)
+-- values ('JohnDoe@gmail.com', 'lkj342ljl;l3'),
+--        ('JaneSmith@gmail.com', 'sdlfkj4lkj;fdg0');
