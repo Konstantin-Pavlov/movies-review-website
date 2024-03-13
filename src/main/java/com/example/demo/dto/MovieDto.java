@@ -10,7 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MovieDto {
+    private long id;
     private String name;
-    private Integer year;
+    private Integer releaseYear;
     private String description;
+    private DirectorDto director;
 }
