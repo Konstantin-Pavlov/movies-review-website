@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUserById(int id) throws UserNotFoundException {
         User user = userDao.getUserById(id).orElseThrow(
-                () -> new UserNotFoundException("Can't find user wit ID: " + id)
+                () -> new UserNotFoundException("Can't find user with ID: " + id)
         );
         return UserDto.builder().
                 id(user.getId())

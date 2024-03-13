@@ -5,6 +5,6 @@ create table if not exists users
     password varchar(45)
 );
 
-insert into users(name, password)
-values ('John Doe', '123456'),
-       ('Jane Smith', '123456');
+-- insert into users(name, password)
+-- values ('John Doe', '123456'),
+--        ('Jane Smith', '123456');
