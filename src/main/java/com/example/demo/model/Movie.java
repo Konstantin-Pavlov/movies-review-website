@@ -12,6 +12,7 @@ import lombok.*;
 public class Movie {
     private long id;
     private String name;
-    private Integer year;
+    private Integer releaseYear;
     private String description;
+    private Long directorId;
 }
