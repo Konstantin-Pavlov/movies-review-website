@@ -24,4 +24,10 @@ spring:
     # disabled because the enabled console can cause unexpected errors
   h2:
     console:
-      enabled: false    #true ->
+      enabled: false    #true
+logging:
+  level:
+    root: info
+
+  file:
+    name: logs/spring.log
