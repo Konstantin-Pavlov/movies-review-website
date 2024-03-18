@@ -1,3 +1,6 @@
 databaseChangeLog:
   - includeAll:
       path: /db_liquid/changelog/initial/
+
+#databaseChangeLog: #not working?
+#  - include file: /db_liquid/changelog/initial/18-03-2024--01-create_table_review_and_user.yaml
