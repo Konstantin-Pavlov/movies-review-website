@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -59,20 +61,32 @@ public class MovieServiceImp implements MovieService {
 
         log.info("movie created: " + movie.getName());
 
-        return  movieDao.createMovieAndReturnId(movie);
+        return movieDao.createMovieAndReturnId(movie);
     }
 
     @Override
     public MovieDto getMovieById(long id) throws MovieNotFoundException {
-         Movie movie = movieDao.getMovieById(id)
-                 .orElseThrow(()-> new MovieNotFoundException("Can't find movie with id " + id));
+        Movie movie = movieDao.getMovieById(id)
+                .orElseThrow(() -> new MovieNotFoundException("Can't find movie with id " + id));
 
-         return MovieDto.builder()
-                 .id(movie.getId())
-                 .name(movie.getName())
-                 .releaseYear(movie.getReleaseYear())
-                 .description(movie.getDescription())
-                 .director(directorService.getDirectorById(movie.getDirectorId()))
-                 .build();
+        return MovieDto.builder()
+                .id(movie.getId())
+                .name(movie.getName())
+                .releaseYear(movie.getReleaseYear())
+                .description(movie.getDescription())
+                .director(directorService.getDirectorById(movie.getDirectorId()))
+                .build();
+    }
+
+    @Override
+    public boolean deleteMovie(Long id) {
+        Optional<Movie> movie = movieDao.getMovieById(id);
+        if (movie.isPresent()) {
+            movieDao.delete(id);
+            log.info("movie deleted: " + movie.get().getName());
+            return true;
+        }
+        log.info(String.format("movie with id %d not found", id));
+        return false;
     }
 }

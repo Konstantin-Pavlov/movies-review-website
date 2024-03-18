@@ -11,4 +11,6 @@ public interface MovieService {
     Long createMovieAndReturnId(MovieDto movieDto);
 
     MovieDto getMovieById(long id) throws MovieNotFoundException;
+
+    boolean deleteMovie(Long id);
 }

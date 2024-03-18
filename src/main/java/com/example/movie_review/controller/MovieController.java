@@ -21,6 +21,7 @@ public class MovieController {
         return ResponseEntity.ok(movieService.getMovies());
     }
 
+    //    @RequestMapping(name = "id", method = RequestMethod.GET)
     @GetMapping("{id}")
     public ResponseEntity<?> getMovieById(@PathVariable long id) {
         try {
@@ -39,5 +40,13 @@ public class MovieController {
     public HttpStatus create(@RequestBody MovieDto movieDto) {
         movieService.createMovie(movieDto);
         return HttpStatus.OK;
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteMovie(@PathVariable Long id) {
+        if (movieService.deleteMovie(id)) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }
