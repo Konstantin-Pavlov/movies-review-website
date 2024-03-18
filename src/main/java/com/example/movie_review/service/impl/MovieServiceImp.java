@@ -1,17 +1,18 @@
-package com.example.movies_revies.service.impl;
+package com.example.movie_review.service.impl;
 
-import com.example.movies_revies.dao.MovieDao;
-import com.example.movies_revies.dto.MovieDto;
-import com.example.movies_revies.exception.MovieNotFoundException;
-import com.example.movies_revies.model.Movie;
-import com.example.movies_revies.service.DirectorService;
-import com.example.movies_revies.service.MovieService;
+import com.example.movie_review.dao.MovieDao;
+import com.example.movie_review.dto.MovieDto;
+import com.example.movie_review.exception.MovieNotFoundException;
+import com.example.movie_review.model.Movie;
+import com.example.movie_review.service.DirectorService;
+import com.example.movie_review.service.MovieService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MovieServiceImp implements MovieService {
@@ -44,6 +45,7 @@ public class MovieServiceImp implements MovieService {
         movie.setDirectorId(movieDto.getDirector().getId());
 
         movieDao.createMovie(movie);
+        log.info("movie created: " + movie.getName());
     }
 
     @Override
@@ -54,6 +56,8 @@ public class MovieServiceImp implements MovieService {
         movie.setReleaseYear(movieDto.getReleaseYear());
         movie.setDescription(movieDto.getDescription());
         movie.setDirectorId(movieDto.getDirector().getId());
+
+        log.info("movie created: " + movie.getName());
 
         return  movieDao.createMovieAndReturnId(movie);
     }
