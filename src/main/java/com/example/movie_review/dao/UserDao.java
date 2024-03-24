@@ -40,12 +40,12 @@ public class UserDao {
 
     public void createUser(UserDto user) {
         String sql = """
-                    insert into users(name, password)
-                    values(:name, :password);
+                    insert into USER_TABLE(EMAIL, USERNAME, PASSWORD)
+                    values(:email, :name, :password);
                 """;
 
         SqlParameterSource params = new  MapSqlParameterSource()
-//                .addValue("id", user.getId())
+                .addValue("email", user.getEmail())
                 .addValue("name", user.getName())
                 .addValue("password", user.getPassword());
         namedParameterJdbcTemplate.update(sql, params);

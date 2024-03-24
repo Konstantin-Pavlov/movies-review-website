@@ -6,11 +6,12 @@ import com.example.movie_review.exception.UserNotFoundException;
 import com.example.movie_review.model.User;
 import com.example.movie_review.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -47,5 +48,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void createUser(UserDto user) {
         userDao.createUser(user);
+        log.info("added user with email " + user.getEmail());
     }
 }
