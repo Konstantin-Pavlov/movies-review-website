@@ -83,7 +83,6 @@ public class MovieServiceImp implements MovieService {
 
     @Override
     public void deleteMovie(Long id) {
-        // todo - add NoSuchElementException
         Optional<Movie> movie = movieDao.getMovieById(id);
         if (movie.isPresent()) {
             movieDao.delete(id);
