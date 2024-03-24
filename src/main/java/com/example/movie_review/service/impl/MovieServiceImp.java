@@ -2,7 +2,6 @@ package com.example.movie_review.service.impl;
 
 import com.example.movie_review.dao.MovieDao;
 import com.example.movie_review.dto.MovieDto;
-import com.example.movie_review.exception.MovieNotFoundException;
 import com.example.movie_review.model.Movie;
 import com.example.movie_review.service.DirectorService;
 import com.example.movie_review.service.MovieService;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Slf4j
@@ -65,10 +65,13 @@ public class MovieServiceImp implements MovieService {
     }
 
     @Override
-    public MovieDto getMovieById(long id) throws MovieNotFoundException {
+    public MovieDto getMovieById(long id) {
         Movie movie = movieDao.getMovieById(id)
-                .orElseThrow(() -> new MovieNotFoundException("Can't find movie with id " + id));
-
+                .orElseThrow(() -> {
+                    log.error("Can't find movie with id " + id);
+                    return new NoSuchElementException("Can't find movie with id " + id);
+                });
+        log.info("Found movie with id " + id);
         return MovieDto.builder()
                 .id(movie.getId())
                 .name(movie.getName())
@@ -79,14 +82,15 @@ public class MovieServiceImp implements MovieService {
     }
 
     @Override
-    public boolean deleteMovie(Long id) {
+    public void deleteMovie(Long id) {
+        // todo - add NoSuchElementException
         Optional<Movie> movie = movieDao.getMovieById(id);
         if (movie.isPresent()) {
             movieDao.delete(id);
             log.info("movie deleted: " + movie.get().getName());
-            return true;
+            return;
         }
-        log.info(String.format("movie with id %d not found", id));
-        return false;
+        log.error(String.format("movie with id %d not found", id));
+        throw new NoSuchElementException("Can't find movie with id " + id);
     }
 }

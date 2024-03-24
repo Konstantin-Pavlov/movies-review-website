@@ -20,7 +20,7 @@ public class UserDto {
     Asserts the start of the string.
     [a-zA-Z]+: Matches one or more alphabetical characters (both uppercase and lowercase).
     (?: ...): Non-capturing group.
-     : Matches a single space.
+    Matches a single space.
     [a-zA-Z]+: Matches one or more alphabetical characters (both uppercase and lowercase) after the space.
     ?: Makes the space and the characters after it optional.
     $: Asserts the end of the string.
@@ -29,14 +29,14 @@ public class UserDto {
     @Pattern(
             regexp = "^[A-Z][a-zA-Z]*((\\s[A-Z][a-zA-Z]*)*)?$", message =
             """
-                    Example matches:      
+                    Example matches:
                     "Dave"
                     "John Doe"
                     "Mary Ann"
                     "Li"
                     "O'Neil"
                                 
-                    Example non-matches:         
+                    Example non-matches:
                     "123"
                     "dave"
                     "John Doe Smith"
