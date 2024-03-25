@@ -2,6 +2,7 @@ package com.example.movie_review.service.impl;
 
 import com.example.movie_review.dao.MovieDao;
 import com.example.movie_review.dto.MovieDto;
+import com.example.movie_review.exception.MovieNotFoundException;
 import com.example.movie_review.model.Movie;
 import com.example.movie_review.service.DirectorService;
 import com.example.movie_review.service.MovieService;
@@ -69,7 +70,7 @@ public class MovieServiceImp implements MovieService {
         Movie movie = movieDao.getMovieById(id)
                 .orElseThrow(() -> {
                     log.error("Can't find movie with id " + id);
-                    return new NoSuchElementException("Can't find movie with id " + id);
+                    return new MovieNotFoundException("Can't find movie with id " + id);
                 });
         log.info("Found movie with id " + id);
         return MovieDto.builder()
