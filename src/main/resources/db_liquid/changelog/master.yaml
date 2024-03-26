@@ -1,6 +1,23 @@
-databaseChangeLog:
-  - includeAll:
-      path: /db_liquid/changelog/initial/
+#databaseChangeLog:
+#  - includeAll:
+#      path: /db_liquid/changelog/initial/
 
 #databaseChangeLog: #not working?
 #  - include file: /db_liquid/changelog/initial/18-03-2024--01-create_table_review_and_user.yaml
+
+# create
+databaseChangeLog:
+  - include:
+      file: /db_liquid/changelog/initial/26-03-2024--01-create_authorities_table.yaml
+  - include:
+      file: /db_liquid/changelog/initial/26-03-2024--01-update_user_table.yaml
+  - include:
+      file: /db_liquid/changelog/initial/26-03-2024--02-create_role-user_table.yaml
+
+#insert
+  - include:
+      file: /db_liquid/changelog/initial/inserts/26-03-2024--01-insert_authorities.sql
+  - include:
+      file: /db_liquid/changelog/initial/inserts/26-03-2024--01-insert_user_authority.sql
+  - include:
+      file: /db_liquid/changelog/initial/inserts/26-03-2024--01-insert_users.sql
