@@ -22,14 +22,14 @@ public class UserDao {
 
     public List<User> getUsers() {
         String sql = """
-                select * from users;
+                    select * from USER_TABLE;
                 """;
         return template.query(sql, new BeanPropertyRowMapper<>(User.class));
     }
 
     public Optional<User> getUserById(int id) {
         String sql = """
-                select * from users
+                select * from USER_TABLE
                 where id = ?;
                 """;
         return Optional.ofNullable(
@@ -40,14 +40,15 @@ public class UserDao {
 
     public void createUser(UserDto user) {
         String sql = """
-                    insert into USER_TABLE(EMAIL, USERNAME, PASSWORD)
-                    values(:email, :name, :password);
+                    insert into USER_TABLE(EMAIL, NAME, PASSWORD, ENABLED)
+                    values(:email, :name, :password, :enabled);
                 """;
 
-        SqlParameterSource params = new  MapSqlParameterSource()
+        SqlParameterSource params = new MapSqlParameterSource()
                 .addValue("email", user.getEmail())
                 .addValue("name", user.getName())
-                .addValue("password", user.getPassword());
+                .addValue("password", user.getPassword())
+                .addValue("enabled", user.isEnabled());
         namedParameterJdbcTemplate.update(sql, params);
 
     }

@@ -13,9 +13,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDto {
-    private Integer id;
+    //    private Integer id;
     @Email
     private String email;
+
     /*^:
     Asserts the start of the string.
     [a-zA-Z]+: Matches one or more alphabetical characters (both uppercase and lowercase).
@@ -34,4 +35,5 @@ public class UserDto {
     private String name;
     @Size(min = 4, max = 24, message = "Password length must be between 4 and 24 characters")
     private String password;
+    private boolean enabled;
 }

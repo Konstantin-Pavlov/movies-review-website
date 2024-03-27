@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -23,25 +24,27 @@ public class UserServiceImpl implements UserService {
         List<UserDto> dtos = new ArrayList<>();
         users.forEach(user ->
                 dtos.add(UserDto.builder()
-                        .id(user.getId())
+                        .email(user.getEmail())
                         .name(user.getName())
                         .password(user.getPassword())
+                        .enabled(user.isEnabled())
                         .build()
                 )
         );
         return dtos;
     }
 
-//    @SneakyThrows // try catch -> e.printStackTrace()
+    //    @SneakyThrows // try catch -> e.printStackTrace()
     @Override
     public UserDto getUserById(int id) throws UserNotFoundException {
         User user = userDao.getUserById(id).orElseThrow(
                 () -> new UserNotFoundException("Can't find user with ID: " + id)
         );
-        return UserDto.builder().
-                id(user.getId())
+        return UserDto.builder()
+                .email(user.getEmail())
                 .name(user.getName())
                 .password(user.getPassword())
+                .enabled(user.isEnabled())
                 .build();
     }
 
