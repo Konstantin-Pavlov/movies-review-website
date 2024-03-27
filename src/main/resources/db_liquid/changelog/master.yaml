@@ -3,21 +3,31 @@
 #      path: /db_liquid/changelog/initial/
 
 #databaseChangeLog: #not working?
-#  - include file: /db_liquid/changelog/initial/18-03-2024--01-create_table_review_and_user.yaml
+#  - include file: /db_liquid/changelog/initial/27-03-2024--01-create_review_table.yaml
 
 # create
 databaseChangeLog:
   - include:
-      file: /db_liquid/changelog/initial/26-03-2024--01-create_authorities_table.yaml
+      file: /db_liquid/changelog/initial/001_create_moderators_table.yaml
   - include:
-      file: /db_liquid/changelog/initial/26-03-2024--01-update_user_table.yaml
+      file: /db_liquid/changelog/initial/002_create_tables.yaml
+  - include:
+      file: /db_liquid/changelog/initial/18-03-2024--01-create_table_movie_image.yaml
+  - include:
+      file: /db_liquid/changelog/initial/27-03-2024--01-create_user_table.yaml
+  - include:
+      file: /db_liquid/changelog/initial/27-03-2024--01-create_review_table.yaml
+  - include:
+      file: /db_liquid/changelog/initial/26-03-2024--01-create_authorities_table.yaml
   - include:
       file: /db_liquid/changelog/initial/26-03-2024--02-create_role-user_table.yaml
 
 #insert
   - include:
-      file: /db_liquid/changelog/initial/inserts/26-03-2024--01-insert_authorities.sql
+      file: /db_liquid/changelog/initial/inserts/003_insert_movies.sql
   - include:
-      file: /db_liquid/changelog/initial/inserts/26-03-2024--01-insert_user_authority.sql
+      file: /db_liquid/changelog/initial/inserts/26-03-2024--03-insert_users.sql
   - include:
-      file: /db_liquid/changelog/initial/inserts/26-03-2024--01-insert_users.sql
+      file: /db_liquid/changelog/initial/inserts/26-03-2024--02-insert_authorities.sql
+  - include:
+      file: /db_liquid/changelog/initial/inserts/26-03-2024--02-insert_user_authority.sql
