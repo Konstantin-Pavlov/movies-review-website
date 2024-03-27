@@ -1,31 +1,8 @@
 databaseChangeLog:
   - changeSet:
-      id: create_table_review_and_user
+      id: create review table
       author: Mari
       changes:
-        - createTable:
-            preConditions:
-              onFail: MARK_RAN
-              not:
-                tableExists:
-                  tableName: user_table
-            tableName: user_table
-            columns:
-              - column:
-                  name: email
-                  type: varchar(100)
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-                    unique: true
-              - column:
-                  name: username
-                  type: varchar(45)
-              - column:
-                  name: password
-                  type: varchar(100)
-                  constraints:
-                    nullable: false
         - createTable:
             preConditions:
               onFail: MARK_RAN
@@ -52,12 +29,22 @@ databaseChangeLog:
                   type: varchar(100)
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_reviewer
-                    references: user_table(email)
               - column:
                   name: movie_id
                   type: bigint
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_movie_id
-                    references: movie(id)
+        - addForeignKeyConstraint:
+            baseTableName: review
+            baseColumnNames: reviewer
+            constraintName: fk_reviewer
+            referencedTableName: user_table
+            referencedColumnNames: email
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: review
+            baseColumnNames: movie_id
+            constraintName: fk_movie_id
+            referencedTableName: movie
+            referencedColumnNames: id
+            onDelete: CASCADE
